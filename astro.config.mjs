@@ -11,4 +11,10 @@ export default defineConfig({
   },
 
   integrations: [react()],
+
+  site: 'https://duchi.click',
+  output: 'static',
+  image: {
+    domains: ['cdn.duchi.click']
+  }
 });
