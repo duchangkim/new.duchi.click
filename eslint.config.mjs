@@ -50,7 +50,10 @@ export default [
     rules: {
       ...reactHooksPlugin.configs.recommended.rules,
       'react/prop-types': 'off',
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
       '@typescript-eslint/consistent-type-imports': 'error',
     },
     settings: {
@@ -84,15 +87,21 @@ export default [
       // Astro 파일 내부 스크립트에서 타입 규칙 일부 완화
       '@typescript-eslint/no-unsafe-assignment': 'warn',
       '@typescript-eslint/no-unsafe-member-access': 'warn',
-    }
+    },
   },
 
-  // 7. 설정 파일 등에서는 타입 체크 끄기
+  // 7. Astro 파일에서 Type-checked 규칙 비활성화 (파싱 오류 해결)
+  {
+    files: ['**/*.astro'],
+    ...tseslint.configs.disableTypeChecked,
+  },
+
+  // 8. 설정 파일 등에서는 타입 체크 끄기 (기존 7번 -> 8번으로 변경)
   {
     files: ['**/*.config.*', '**/*.d.ts'],
     extends: [tseslint.configs.disableTypeChecked],
   },
 
-  // 8. Prettier 설정 (마지막)
-  eslintConfigPrettier
+  // 9. Prettier 설정 (마지막) (기존 8번 -> 9번으로 변경)
+  eslintConfigPrettier,
 ];
