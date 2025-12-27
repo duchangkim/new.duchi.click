@@ -1,0 +1,49 @@
+---
+description: Astro development guidelines, coding style, and commit standards
+globs: ["**/*.astro", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs"]
+alwaysApply: false
+---
+
+# Project Guidelines
+
+## Commit Message Guidelines
+
+- **Format**: Follow the conventional commits specification.
+
+  ```text
+  <type>[optional scope]: <description>
+
+  [optional body]
+
+  [optional footer(s)]
+  ```
+
+- **Rules**:
+  - Always suggest a conventional commit with a type and optional scope in lowercase letters.
+  - Keep the commit message concise and within 60 characters.
+  - Ensure the commit message is ready to be pasted into the terminal without further editing.
+  - Provide the full command to commit, not just the message.
+- **Example**:
+  - User: `/commit` (with diff context)
+  - Assistant: `git commit -m 'feat: add responsive navbar with TailwindCSS'`
+
+## Development Guidelines
+
+- **TypeScript**: Enforce strict TypeScript settings, ensuring type safety across the project.
+- **TailwindCSS**: Use TailwindCSS for all styling, keeping the utility-first approach in mind.
+- **Astro Components**: Ensure Astro components are modular, reusable, and maintain a clear separation of concerns.
+
+## Coding Style
+
+- **File Headers**: Code must start with path/filename as a one-line comment.
+
+  ```typescript
+  // src/components/Card.astro
+  ```
+
+- **Comments**: Comments should describe purpose, not effect.
+- **Principles**: Prioritize modularity, DRY (Don't Repeat Yourself) principles, and performance.
+
+## Custom Commands
+
+- **/commit**: Generate a Git commit message using the conventional commits spec.
