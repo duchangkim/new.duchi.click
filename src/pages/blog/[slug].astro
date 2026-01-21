@@ -1,9 +1,9 @@
 ---
 // src/pages/blog/[slug].astro
-import type { GetStaticPaths } from 'astro';
+import type { GetStaticPaths } from "astro";
 
-import BaseLayout from '@/layouts/base-layout.astro';
-import { getAllPostSlugs, getPostBySlug } from '@/lib/ghost';
+import BaseLayout from "@/layouts/base-layout.astro";
+import { getAllPostSlugs, getPostBySlug } from "@/lib/ghost";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const slugs = await getAllPostSlugs();
@@ -12,31 +12,41 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const { slug } = Astro.params;
 
-if (!slug || typeof slug !== 'string') {
-  return Astro.redirect('/404');
+if (!slug || typeof slug !== "string") {
+  return Astro.redirect("/404");
 }
 
 const post = await getPostBySlug(slug);
 
 if (!post) {
-  return Astro.redirect('/404');
+  return Astro.redirect("/404");
 }
 
-const publishedDate = new Date(post.published_at).toLocaleDateString('ko-KR', {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+const publishedDate = new Date(post.published_at).toLocaleDateString("ko-KR", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 });
 
-const pageTitle = `${post.title} | duchi.click`;
-const pageDescription = post.custom_excerpt || post.excerpt || '';
+const pageTitle = `${post.title} | blog.duchi.click`;
+const pageDescription = post.custom_excerpt || post.excerpt || "";
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} image={post.feature_image ?? undefined}>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={post.feature_image ?? undefined}
+>
   <article class="container mx-auto max-w-4xl px-4 py-12">
     <header class="mb-12">
-      {post.primary_tag && <span class="badge badge-primary badge-lg mb-4">{post.primary_tag.name}</span>}
+      {
+        post.primary_tag && (
+          <span class="badge badge-primary badge-lg mb-4">
+            {post.primary_tag.name}
+          </span>
+        )
+      }
 
       <h1 class="mb-6 text-4xl font-bold md:text-5xl">
         {post.title}
@@ -72,7 +82,10 @@ const pageDescription = post.custom_excerpt || post.excerpt || '';
       }
     </header>
 
-    <div class="prose prose-lg prose-slate max-w-none dark:prose-invert" set:html={post.html} />
+    <div
+      class="prose prose-lg prose-slate max-w-none dark:prose-invert"
+      set:html={post.html}
+    />
 
     <footer class="mt-16 border-t border-base-200 pt-8">
       <a href="/blog" class="btn btn-outline btn-primary">← Back to Blog</a>

@@ -101,7 +101,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [react()],
-  site: "https://duchi.click",
+  site: "https://blog.duchi.click",
   output: "static",
   image: {
     domains: ["cdn.duchi.click"],
@@ -420,7 +420,7 @@ interface Props {
 const { posts } = Astro.props;
 
 // Generate SEO metadata
-const pageTitle = "Blog | duchi.click";
+const pageTitle = "Blog | blog.duchi.click";
 const pageDescription = "Latest articles and thoughts on software development.";
 ---
 

@@ -11,7 +11,7 @@ export default defineConfig({
 
   integrations: [react()],
 
-  site: "https://duchi.click",
+  site: "https://blog.duchi.click",
   output: "static",
   image: {
     domains: ["cdn.duchi.click"],
