@@ -1,0 +1,82 @@
+---
+// src/layouts/content-list-layout.astro
+import type { Page } from 'astro';
+
+import Pagination from '@/components/pagination.astro';
+import BaseLayout from '@/layouts/base-layout.astro';
+import type { CardItem } from '@/types/content';
+
+interface Props {
+  title: string;
+  description: string;
+  page: Page<CardItem>;
+  basePath: string;
+}
+
+const { title, description, page, basePath } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="container mx-auto px-4 py-12">
+    <header class="mb-12">
+      <h1 class="mb-4 text-4xl font-bold">{title.split(' | ')[0]}</h1>
+      <p class="text-lg text-base-content/70">{description}</p>
+    </header>
+
+    {
+      page.data.length === 0 ? (
+        <div class="py-12 text-center">
+          <p class="text-base-content/50">No posts found.</p>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {page.data.map((item) => (
+            <a
+              href={`${basePath}/${item.slug}`}
+              class="card bg-base-100 shadow-xl transition-shadow duration-300 hover:shadow-2xl"
+            >
+              <figure class="aspect-video">
+                {item.featureImage ? (
+                  <img
+                    src={item.featureImage}
+                    alt={item.title}
+                    class="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="flex h-full w-full items-center justify-center bg-base-200">
+                    <span class="text-4xl opacity-20">📝</span>
+                  </div>
+                )}
+              </figure>
+              <div class="card-body">
+                <div class="mb-2 flex flex-wrap items-center gap-2">
+                  {item.primaryTag && (
+                    <span class="badge badge-primary badge-sm">{item.primaryTag.name}</span>
+                  )}
+                  {item.readingTime && (
+                    <span class="badge badge-ghost badge-sm">{item.readingTime} min read</span>
+                  )}
+                  <span class="text-xs text-base-content/50">
+                    {new Date(item.publishedAt).toLocaleDateString('ko-KR', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </span>
+                </div>
+                <h2 class="card-title text-xl">{item.title}</h2>
+                <p class="line-clamp-3 text-sm text-base-content/70">{item.excerpt}</p>
+                <div class="card-actions mt-4 justify-end">
+                  <span class="link link-hover text-sm text-primary">Read more →</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      )
+    }
+
+    {page.lastPage > 1 && <Pagination page={page} basePath={basePath} />}
+  </main>
+</BaseLayout>

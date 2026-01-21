@@ -40,7 +40,14 @@ npx astro check    # Run Astro type checker
 npx tsc --noEmit   # TypeScript type check only
 ```
 
-> **Note**: No test framework is currently configured.
+### Validation (Recommended)
+
+```bash
+npm run validate   # Full validation: typecheck → astro check → lint → format check
+npm run lint:fix && npm run format  # Auto-fix all issues
+```
+
+> **Note**: Always run `npm run validate` before committing changes.
 
 ---
 

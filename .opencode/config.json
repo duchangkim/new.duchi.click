@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/schemas/config.json",
+  "hooks": {
+    "post-edit": {
+      "command": "npm run validate",
+      "description": "Run typecheck, astro check, lint, and format check after edits",
+      "on_failure": "warn"
+    }
+  },
+  "commands": {
+    "validate": {
+      "command": "npm run validate",
+      "description": "Full project validation (ts, astro, lint, format)"
+    },
+    "fix": {
+      "command": "npm run lint:fix && npm run format",
+      "description": "Auto-fix lint and format issues"
+    },
+    "build": {
+      "command": "npm run build",
+      "description": "Build production site"
+    }
+  }
+}

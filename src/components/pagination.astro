@@ -1,0 +1,103 @@
+---
+// src/components/pagination.astro
+import type { Page } from 'astro';
+
+import type { CardItem } from '@/types/content';
+
+interface Props {
+  page: Page<CardItem>;
+  basePath: string;
+}
+
+const { page, basePath } = Astro.props;
+
+const getPageUrl = (pageNum: number): string => {
+  return pageNum === 1 ? basePath : `${basePath}/${pageNum}`;
+};
+
+const maxVisible = 5;
+const showStartEllipsis = page.currentPage > 3;
+const showEndEllipsis = page.currentPage < page.lastPage - 2;
+
+const getPageNumbers = (): number[] => {
+  const pages: number[] = [];
+  let start = Math.max(1, page.currentPage - 2);
+  let end = Math.min(page.lastPage, page.currentPage + 2);
+
+  if (end - start < maxVisible - 1) {
+    if (start === 1) {
+      end = Math.min(page.lastPage, start + maxVisible - 1);
+    } else if (end === page.lastPage) {
+      start = Math.max(1, end - maxVisible + 1);
+    }
+  }
+
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
+  return pages;
+};
+
+const pageNumbers = getPageNumbers();
+---
+
+<nav class="mt-12 flex justify-center" aria-label="Pagination">
+  <div class="join">
+    {
+      page.url.prev ? (
+        <a href={page.url.prev} class="btn join-item">
+          «
+        </a>
+      ) : (
+        <span class="btn btn-disabled join-item">«</span>
+      )
+    }
+
+    <a
+      href={getPageUrl(1)}
+      class:list={['btn join-item', { 'btn-active': page.currentPage === 1 }]}
+    >
+      1
+    </a>
+
+    {showStartEllipsis && <span class="btn btn-disabled join-item">...</span>}
+
+    {
+      pageNumbers.map(
+        (num) =>
+          num !== 1 &&
+          num !== page.lastPage && (
+            <a
+              href={getPageUrl(num)}
+              class:list={['btn join-item', { 'btn-active': num === page.currentPage }]}
+            >
+              {num}
+            </a>
+          )
+      )
+    }
+
+    {showEndEllipsis && <span class="btn btn-disabled join-item">...</span>}
+
+    {
+      page.lastPage > 1 && (
+        <a
+          href={getPageUrl(page.lastPage)}
+          class:list={['btn join-item', { 'btn-active': page.currentPage === page.lastPage }]}
+        >
+          {page.lastPage}
+        </a>
+      )
+    }
+
+    {
+      page.url.next ? (
+        <a href={page.url.next} class="btn join-item">
+          »
+        </a>
+      ) : (
+        <span class="btn btn-disabled join-item">»</span>
+      )
+    }
+  </div>
+</nav>
