@@ -1,5 +1,5 @@
 ---
-import "../assets/app.css";
+import '../assets/app.css';
 
 interface Props {
   title: string;
@@ -34,15 +34,26 @@ const { title, description } = Astro.props;
         var html = document.documentElement;
 
         var colorKeys = [
-          'primary', 'primary-content',
-          'secondary', 'secondary-content',
-          'accent', 'accent-content',
-          'neutral', 'neutral-content',
-          'base-100', 'base-200', 'base-300', 'base-content',
-          'info', 'info-content',
-          'success', 'success-content',
-          'warning', 'warning-content',
-          'error', 'error-content'
+          'primary',
+          'primary-content',
+          'secondary',
+          'secondary-content',
+          'accent',
+          'accent-content',
+          'neutral',
+          'neutral-content',
+          'base-100',
+          'base-200',
+          'base-300',
+          'base-content',
+          'info',
+          'info-content',
+          'success',
+          'success-content',
+          'warning',
+          'warning-content',
+          'error',
+          'error-content',
         ];
 
         colorKeys.forEach(function (key) {
@@ -57,7 +68,9 @@ const { title, description } = Astro.props;
             var stored = localStorage.getItem(USER_THEMES_KEY);
             if (stored) {
               var userThemes = JSON.parse(stored);
-              var userTheme = userThemes.find(function (t) { return t.id === themeId; });
+              var userTheme = userThemes.find(function (t) {
+                return t.id === themeId;
+              });
               if (userTheme && userTheme.colors) {
                 Object.keys(userTheme.colors).forEach(function (key) {
                   if (userTheme.colors[key]) {

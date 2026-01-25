@@ -1,14 +1,14 @@
 ---
 // src/pages/blog/[...page].astro
-import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
-import ContentListLayout from "@/layouts/content-list-layout.astro";
-import { getPosts } from "@/lib/ghost";
-import type { CardItem } from "@/types/content";
+import ContentListLayout from '@/layouts/content-list-layout.astro';
+import { getPosts } from '@/lib/ghost';
+import type { CardItem } from '@/types/content';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const PAGE_SIZE = 9;
-  const posts = await getPosts({ limit: "all" });
+  const posts = await getPosts({ limit: 'all' });
 
   const cardItems: CardItem[] = posts.map((post) => ({
     slug: post.slug,
@@ -31,14 +31,9 @@ const { page } = Astro.props as Props;
 
 const pageTitle =
   page.currentPage === 1
-    ? "Blog | blog.duchi.click"
+    ? 'Blog | blog.duchi.click'
     : `Blog - Page ${page.currentPage} | blog.duchi.click`;
-const pageDescription = "Latest articles and thoughts on software development.";
+const pageDescription = 'Latest articles and thoughts on software development.';
 ---
 
-<ContentListLayout
-  title={pageTitle}
-  description={pageDescription}
-  page={page}
-  basePath="/blog"
-/>
+<ContentListLayout title={pageTitle} description={pageDescription} page={page} basePath="/blog" />

@@ -77,10 +77,10 @@ All code files must start with a path comment:
 ```astro
 ---
 // ✅ Good
-import BaseLayout from "@/layouts/base-layout.astro";
+import BaseLayout from '@/layouts/base-layout.astro';
 
 // ❌ Avoid
-import BaseLayout from "../../layouts/base-layout.astro";
+import BaseLayout from '../../layouts/base-layout.astro';
 ---
 ```
 
@@ -104,7 +104,7 @@ import BaseLayout from "../../layouts/base-layout.astro";
 
 ```typescript
 // ✅ Enforced by @typescript-eslint/consistent-type-imports
-import type { CollectionEntry } from "astro:content";
+import type { CollectionEntry } from 'astro:content';
 ```
 
 - Unused variables must be prefixed with `_`:
@@ -131,7 +131,7 @@ Structure of `.astro` files:
 ```astro
 ---
 // 1. Imports
-import Component from "@/components/Component.astro";
+import Component from '@/components/Component.astro';
 
 // 2. Props interface
 interface Props {

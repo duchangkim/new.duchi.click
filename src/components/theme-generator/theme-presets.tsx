@@ -1,7 +1,7 @@
 // src/components/theme-generator/theme-presets.tsx
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
-import { DAISYUI_THEMES } from "@/lib/theme";
+import { DAISYUI_THEMES } from '@/lib/theme';
 
 interface Props {
   onSelectPreset: (themeName: string) => void;
@@ -15,9 +15,7 @@ interface PresetColors {
 }
 
 export default function ThemePresets({ onSelectPreset }: Props) {
-  const [presetColors, setPresetColors] = useState<
-    Record<string, PresetColors>
-  >({});
+  const [presetColors, setPresetColors] = useState<Record<string, PresetColors>>({});
 
   const probeRefCallback = useCallback((probe: HTMLDivElement | null) => {
     if (!probe) return;
@@ -25,13 +23,13 @@ export default function ThemePresets({ onSelectPreset }: Props) {
     const colors: Record<string, PresetColors> = {};
 
     DAISYUI_THEMES.forEach((theme) => {
-      probe.setAttribute("data-theme", theme);
+      probe.setAttribute('data-theme', theme);
       const style = getComputedStyle(probe);
       colors[theme] = {
-        primary: style.getPropertyValue("--color-primary") || "#570df8",
-        secondary: style.getPropertyValue("--color-secondary") || "#f000b8",
-        accent: style.getPropertyValue("--color-accent") || "#37cdbe",
-        neutral: style.getPropertyValue("--color-neutral") || "#3d4451",
+        primary: style.getPropertyValue('--color-primary') || '#570df8',
+        secondary: style.getPropertyValue('--color-secondary') || '#f000b8',
+        accent: style.getPropertyValue('--color-accent') || '#37cdbe',
+        neutral: style.getPropertyValue('--color-neutral') || '#3d4451',
       };
     });
 

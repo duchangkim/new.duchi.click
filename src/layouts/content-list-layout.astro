@@ -20,7 +20,7 @@ const { title, description, page, basePath } = Astro.props;
   <main class="container mx-auto px-4 py-12">
     <header class="mb-12">
       <h1 class="mb-4 text-4xl font-bold">{title.split(' | ')[0]}</h1>
-      <p class="text-lg text-base-content/70">{description}</p>
+      <p class="text-base-content/70 text-lg">{description}</p>
     </header>
 
     {
@@ -44,7 +44,7 @@ const { title, description, page, basePath } = Astro.props;
                     loading="lazy"
                   />
                 ) : (
-                  <div class="flex h-full w-full items-center justify-center bg-base-200">
+                  <div class="bg-base-200 flex h-full w-full items-center justify-center">
                     <span class="text-4xl opacity-20">📝</span>
                   </div>
                 )}
@@ -57,7 +57,7 @@ const { title, description, page, basePath } = Astro.props;
                   {item.readingTime && (
                     <span class="badge badge-ghost badge-sm">{item.readingTime} min read</span>
                   )}
-                  <span class="text-xs text-base-content/50">
+                  <span class="text-base-content/50 text-xs">
                     {new Date(item.publishedAt).toLocaleDateString('ko-KR', {
                       year: 'numeric',
                       month: 'short',
@@ -66,9 +66,9 @@ const { title, description, page, basePath } = Astro.props;
                   </span>
                 </div>
                 <h2 class="card-title text-xl">{item.title}</h2>
-                <p class="line-clamp-3 text-sm text-base-content/70">{item.excerpt}</p>
+                <p class="text-base-content/70 line-clamp-3 text-sm">{item.excerpt}</p>
                 <div class="card-actions mt-4 justify-end">
-                  <span class="link link-hover text-sm text-primary">Read more →</span>
+                  <span class="link link-hover text-primary text-sm">Read more →</span>
                 </div>
               </div>
             </a>

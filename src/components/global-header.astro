@@ -44,7 +44,7 @@ const isActive = (href: string): boolean => {
       </div>
       <ul
         tabindex="0"
-        class="menu dropdown-content menu-sm z-10 mt-3 w-52 rounded-box bg-base-100 p-2 shadow gap-1"
+        class="menu dropdown-content menu-sm rounded-box bg-base-100 z-10 mt-3 w-52 gap-1 p-2 shadow"
       >
         {
           navItems.map((item) => (
@@ -60,7 +60,7 @@ const isActive = (href: string): boolean => {
         }
       </ul>
     </div>
-    <ul class="menu menu-horizontal hidden px-1 lg:flex gap-1">
+    <ul class="menu menu-horizontal hidden gap-1 px-1 lg:flex">
       {
         navItems.map((item) => (
           <li>

@@ -2,25 +2,25 @@
 
 export interface ThemeColors {
   primary: string;
-  "primary-content": string;
+  'primary-content': string;
   secondary: string;
-  "secondary-content": string;
+  'secondary-content': string;
   accent: string;
-  "accent-content": string;
+  'accent-content': string;
   neutral: string;
-  "neutral-content": string;
-  "base-100": string;
-  "base-200": string;
-  "base-300": string;
-  "base-content": string;
+  'neutral-content': string;
+  'base-100': string;
+  'base-200': string;
+  'base-300': string;
+  'base-content': string;
   info: string;
-  "info-content": string;
+  'info-content': string;
   success: string;
-  "success-content": string;
+  'success-content': string;
   warning: string;
-  "warning-content": string;
+  'warning-content': string;
   error: string;
-  "error-content": string;
+  'error-content': string;
 }
 
 export interface UserTheme {
@@ -30,71 +30,71 @@ export interface UserTheme {
   createdAt: number;
 }
 
-export const DAISYUI_THEMES = ["light", "dark"] as const;
+export const DAISYUI_THEMES = ['light', 'dark'] as const;
 
 export type DaisyUITheme = (typeof DAISYUI_THEMES)[number];
 
-const THEME_KEY = "duchi-theme";
-const USER_THEMES_KEY = "duchi-user-themes";
+const THEME_KEY = 'duchi-theme';
+const USER_THEMES_KEY = 'duchi-user-themes';
 
 export const COLOR_KEYS: (keyof ThemeColors)[] = [
-  "primary",
-  "primary-content",
-  "secondary",
-  "secondary-content",
-  "accent",
-  "accent-content",
-  "neutral",
-  "neutral-content",
-  "base-100",
-  "base-200",
-  "base-300",
-  "base-content",
-  "info",
-  "info-content",
-  "success",
-  "success-content",
-  "warning",
-  "warning-content",
-  "error",
-  "error-content",
+  'primary',
+  'primary-content',
+  'secondary',
+  'secondary-content',
+  'accent',
+  'accent-content',
+  'neutral',
+  'neutral-content',
+  'base-100',
+  'base-200',
+  'base-300',
+  'base-content',
+  'info',
+  'info-content',
+  'success',
+  'success-content',
+  'warning',
+  'warning-content',
+  'error',
+  'error-content',
 ];
 
 export const DEFAULT_COLORS: ThemeColors = {
-  primary: "oklch(0.65 0.2 250)",
-  "primary-content": "oklch(0.98 0.01 250)",
-  secondary: "oklch(0.65 0.2 320)",
-  "secondary-content": "oklch(0.98 0.01 320)",
-  accent: "oklch(0.65 0.15 180)",
-  "accent-content": "oklch(0.98 0.01 180)",
-  neutral: "oklch(0.35 0.02 250)",
-  "neutral-content": "oklch(0.95 0.01 250)",
-  "base-100": "oklch(1 0 0)",
-  "base-200": "oklch(0.96 0 0)",
-  "base-300": "oklch(0.92 0 0)",
-  "base-content": "oklch(0.2 0 0)",
-  info: "oklch(0.7 0.15 220)",
-  "info-content": "oklch(0.98 0.01 220)",
-  success: "oklch(0.7 0.2 145)",
-  "success-content": "oklch(0.98 0.01 145)",
-  warning: "oklch(0.8 0.18 85)",
-  "warning-content": "oklch(0.2 0.05 85)",
-  error: "oklch(0.65 0.2 25)",
-  "error-content": "oklch(0.98 0.01 25)",
+  primary: 'oklch(0.65 0.2 250)',
+  'primary-content': 'oklch(0.98 0.01 250)',
+  secondary: 'oklch(0.65 0.2 320)',
+  'secondary-content': 'oklch(0.98 0.01 320)',
+  accent: 'oklch(0.65 0.15 180)',
+  'accent-content': 'oklch(0.98 0.01 180)',
+  neutral: 'oklch(0.35 0.02 250)',
+  'neutral-content': 'oklch(0.95 0.01 250)',
+  'base-100': 'oklch(1 0 0)',
+  'base-200': 'oklch(0.96 0 0)',
+  'base-300': 'oklch(0.92 0 0)',
+  'base-content': 'oklch(0.2 0 0)',
+  info: 'oklch(0.7 0.15 220)',
+  'info-content': 'oklch(0.98 0.01 220)',
+  success: 'oklch(0.7 0.2 145)',
+  'success-content': 'oklch(0.98 0.01 145)',
+  warning: 'oklch(0.8 0.18 85)',
+  'warning-content': 'oklch(0.2 0.05 85)',
+  error: 'oklch(0.65 0.2 25)',
+  'error-content': 'oklch(0.98 0.01 25)',
 };
 
 export function getStoredTheme(): string {
-  if (typeof window === "undefined") return "light";
-  return localStorage.getItem(THEME_KEY) ?? "light";
+  if (typeof window === 'undefined') return 'light';
+  return localStorage.getItem(THEME_KEY) ?? 'light';
 }
 
 export function setStoredTheme(theme: string): void {
-  if (typeof window === "undefined") return;
+  if (typeof window === 'undefined') return;
   localStorage.setItem(THEME_KEY, theme);
 }
 
 export function getUserThemes(): UserTheme[] {
-  if (typeof window === "undefined") return [];
+  if (typeof window === 'undefined') return [];
   try {
     const stored = localStorage.getItem(USER_THEMES_KEY);
     if (stored) {
@@ -107,7 +107,7 @@ export function getUserThemes(): UserTheme[] {
 }
 
 export function setUserThemes(themes: UserTheme[]): void {
-  if (typeof window === "undefined") return;
+  if (typeof window === 'undefined') return;
   localStorage.setItem(USER_THEMES_KEY, JSON.stringify(themes));
 }
 
@@ -132,7 +132,7 @@ export function getUserTheme(themeId: string): UserTheme | undefined {
 }
 
 export function isUserTheme(themeName: string): boolean {
-  return themeName.startsWith("user-");
+  return themeName.startsWith('user-');
 }
 
 export function isDaisyUITheme(themeName: string): themeName is DaisyUITheme {
@@ -140,7 +140,7 @@ export function isDaisyUITheme(themeName: string): themeName is DaisyUITheme {
 }
 
 export function applyTheme(themeName: string): void {
-  if (typeof window === "undefined") return;
+  if (typeof window === 'undefined') return;
 
   const html = document.documentElement;
 
@@ -149,24 +149,22 @@ export function applyTheme(themeName: string): void {
   });
 
   if (isDaisyUITheme(themeName)) {
-    html.setAttribute("data-theme", themeName);
+    html.setAttribute('data-theme', themeName);
   } else if (isUserTheme(themeName)) {
-    const themeId = themeName.replace("user-", "");
+    const themeId = themeName.replace('user-', '');
     const userTheme = getUserTheme(themeId);
 
-    html.setAttribute("data-theme", "light");
+    html.setAttribute('data-theme', 'light');
 
     if (userTheme) {
-      Object.entries(userTheme.colors).forEach(
-        ([key, value]: [string, string]) => {
-          if (value) {
-            html.style.setProperty(`--color-${key}`, value);
-          }
+      Object.entries(userTheme.colors).forEach(([key, value]: [string, string]) => {
+        if (value) {
+          html.style.setProperty(`--color-${key}`, value);
         }
-      );
+      });
     }
   } else {
-    html.setAttribute("data-theme", "light");
+    html.setAttribute('data-theme', 'light');
   }
 }
 
@@ -257,7 +255,7 @@ export function oklchToHex(color: OklchColor): string {
   const toHex = (x: number) =>
     Math.round(x * 255)
       .toString(16)
-      .padStart(2, "0");
+      .padStart(2, '0');
 
   return `#${toHex(r)}${toHex(g)}${toHex(b_)}`;
 }
@@ -267,8 +265,7 @@ export function hexToOklch(hex: string): OklchColor {
   const g = parseInt(hex.slice(3, 5), 16) / 255;
   const b = parseInt(hex.slice(5, 7), 16) / 255;
 
-  const toLinear = (x: number) =>
-    x >= 0.04045 ? Math.pow((x + 0.055) / 1.055, 2.4) : x / 12.92;
+  const toLinear = (x: number) => (x >= 0.04045 ? Math.pow((x + 0.055) / 1.055, 2.4) : x / 12.92);
 
   const rLin = toLinear(r);
   const gLin = toLinear(g);

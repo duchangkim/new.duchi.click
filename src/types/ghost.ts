@@ -90,9 +90,9 @@ export interface PostsOrPages extends Array<GhostPost> {
 }
 
 export interface GhostBrowseParams {
-  limit?: number | "all";
+  limit?: number | 'all';
   page?: number;
-  include?: ("tags" | "authors")[];
+  include?: ('tags' | 'authors')[];
   filter?: string;
   fields?: string[];
   order?: string;

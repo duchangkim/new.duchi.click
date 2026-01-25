@@ -1,24 +1,17 @@
 // src/components/theme-generator/theme-generator.tsx
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 
-import type { ThemeColors } from "@/lib/theme";
-import {
-  createUserTheme,
-  DEFAULT_COLORS,
-  exportUserTheme,
-  saveUserTheme,
-} from "@/lib/theme";
+import type { ThemeColors } from '@/lib/theme';
+import { createUserTheme, DEFAULT_COLORS, exportUserTheme, saveUserTheme } from '@/lib/theme';
 
-import ColorPickerPanel from "./color-picker-panel";
-import ThemePresets from "./theme-presets";
-import ThemePreview from "./theme-preview";
+import ColorPickerPanel from './color-picker-panel';
+import ThemePresets from './theme-presets';
+import ThemePreview from './theme-preview';
 
 export default function ThemeGenerator() {
   const [colors, setColors] = useState<ThemeColors>({ ...DEFAULT_COLORS });
-  const [themeName, setThemeName] = useState("My Theme");
-  const [activeColor, setActiveColor] = useState<keyof ThemeColors | null>(
-    "primary",
-  );
+  const [themeName, setThemeName] = useState('My Theme');
+  const [activeColor, setActiveColor] = useState<keyof ThemeColors | null>('primary');
   const probeRef = useRef<HTMLDivElement>(null);
 
   const handleColorChange = (key: keyof ThemeColors, value: string) => {
@@ -28,31 +21,31 @@ export default function ThemeGenerator() {
   const handleSelectPreset = (presetName: string) => {
     if (!probeRef.current) return;
 
-    probeRef.current.setAttribute("data-theme", presetName);
+    probeRef.current.setAttribute('data-theme', presetName);
     const style = getComputedStyle(probeRef.current);
 
     const newColors: Partial<ThemeColors> = {};
     const colorKeys: (keyof ThemeColors)[] = [
-      "primary",
-      "primary-content",
-      "secondary",
-      "secondary-content",
-      "accent",
-      "accent-content",
-      "neutral",
-      "neutral-content",
-      "base-100",
-      "base-200",
-      "base-300",
-      "base-content",
-      "info",
-      "info-content",
-      "success",
-      "success-content",
-      "warning",
-      "warning-content",
-      "error",
-      "error-content",
+      'primary',
+      'primary-content',
+      'secondary',
+      'secondary-content',
+      'accent',
+      'accent-content',
+      'neutral',
+      'neutral-content',
+      'base-100',
+      'base-200',
+      'base-300',
+      'base-content',
+      'info',
+      'info-content',
+      'success',
+      'success-content',
+      'warning',
+      'warning-content',
+      'error',
+      'error-content',
     ];
 
     colorKeys.forEach((key) => {
@@ -69,26 +62,26 @@ export default function ThemeGenerator() {
   const handleSave = () => {
     const theme = createUserTheme(themeName, colors);
     saveUserTheme(theme);
-    window.location.href = "/";
+    window.location.href = '/';
   };
 
   const handleExport = () => {
     const theme = createUserTheme(themeName, colors);
     const json = exportUserTheme(theme);
-    const blob = new Blob([json], { type: "application/json" });
+    const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
-    a.download = `${themeName.toLowerCase().replace(/\s+/g, "-")}.json`;
+    a.download = `${themeName.toLowerCase().replace(/\s+/g, '-')}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
 
   return (
-    <div className="flex h-screen flex-col bg-base-100">
+    <div className="bg-base-100 flex h-screen flex-col">
       <div ref={probeRef} className="hidden" />
 
-      <header className="flex items-center gap-4 border-b border-base-300 px-4 py-3">
+      <header className="border-base-300 flex items-center gap-4 border-b px-4 py-3">
         <a href="/" className="btn btn-ghost btn-sm">
           ← Back
         </a>
@@ -100,28 +93,20 @@ export default function ThemeGenerator() {
           placeholder="Theme name"
         />
         <div className="flex-1" />
-        <button
-          type="button"
-          onClick={handleExport}
-          className="btn btn-outline btn-sm"
-        >
+        <button type="button" onClick={handleExport} className="btn btn-outline btn-sm">
           Export JSON
         </button>
-        <button
-          type="button"
-          onClick={handleSave}
-          className="btn btn-primary btn-sm"
-        >
+        <button type="button" onClick={handleSave} className="btn btn-primary btn-sm">
           Save Theme
         </button>
       </header>
 
       <div className="flex flex-1 overflow-hidden">
-        <div className="flex-1 border-r border-base-300 p-4">
+        <div className="border-base-300 flex-1 border-r p-4">
           <ThemePreview colors={colors} />
         </div>
 
-        <div className="w-80 border-r border-base-300">
+        <div className="border-base-300 w-80 border-r">
           <ColorPickerPanel
             colors={colors}
             activeColor={activeColor}

@@ -1,7 +1,7 @@
 // src/components/theme-selector.tsx
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import type { UserTheme } from "@/lib/theme";
+import type { UserTheme } from '@/lib/theme';
 import {
   applyTheme,
   DAISYUI_THEMES,
@@ -9,15 +9,15 @@ import {
   getUserThemes,
   isUserTheme,
   setStoredTheme,
-} from "@/lib/theme";
+} from '@/lib/theme';
 
 export default function ThemeSelector() {
   const [currentTheme, setCurrentTheme] = useState<string>(() => {
-    if (typeof window === "undefined") return "light";
+    if (typeof window === 'undefined') return 'light';
     return getStoredTheme();
   });
   const [userThemes] = useState<UserTheme[]>(() => {
-    if (typeof window === "undefined") return [];
+    if (typeof window === 'undefined') return [];
     return getUserThemes();
   });
 
@@ -60,14 +60,14 @@ export default function ThemeSelector() {
       </div>
       <ul
         tabIndex={0}
-        className="dropdown-content z-10 mt-3 max-h-96 w-52 overflow-y-auto  bg-base-200 p-2 shadow-2xl rounded-box"
+        className="dropdown-content bg-base-200 rounded-box z-10 mt-3 max-h-96 w-52 overflow-y-auto p-2 shadow-2xl"
       >
         {displayThemes.map((theme) => (
           <li key={theme}>
             <button
               type="button"
               className={`btn btn-ghost btn-sm btn-block justify-start capitalize ${
-                currentTheme === theme ? "btn-active" : ""
+                currentTheme === theme ? 'btn-active' : ''
               }`}
               onClick={() => handleThemeChange(theme)}
             >
@@ -85,10 +85,9 @@ export default function ThemeSelector() {
                 <button
                   type="button"
                   className={`btn btn-ghost btn-sm btn-block justify-start ${
-                    currentTheme === `user-${theme.id}` ||
-                    isUserTheme(currentTheme)
-                      ? "btn-active"
-                      : ""
+                    currentTheme === `user-${theme.id}` || isUserTheme(currentTheme)
+                      ? 'btn-active'
+                      : ''
                   }`}
                   onClick={() => handleThemeChange(`user-${theme.id}`)}
                 >
@@ -101,10 +100,7 @@ export default function ThemeSelector() {
 
         <li className="divider my-1" />
         <li>
-          <a
-            href="/theme-generator"
-            className="btn btn-ghost btn-sm btn-block justify-start"
-          >
+          <a href="/theme-generator" className="btn btn-ghost btn-sm btn-block justify-start">
             Create Theme
           </a>
         </li>
