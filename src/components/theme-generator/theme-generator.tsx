@@ -1,7 +1,7 @@
 // src/components/theme-generator/theme-generator.tsx
 import { useRef, useState } from 'react';
 
-import type { ThemeColors } from '@/lib/theme';
+import type { ThemeColors, UserTheme } from '@/lib/theme';
 import { createUserTheme, DEFAULT_COLORS, exportUserTheme, saveUserTheme } from '@/lib/theme';
 
 import ColorPickerPanel from './color-picker-panel';
@@ -12,6 +12,7 @@ export default function ThemeGenerator() {
   const [colors, setColors] = useState<ThemeColors>({ ...DEFAULT_COLORS });
   const [themeName, setThemeName] = useState('My Theme');
   const [activeColor, setActiveColor] = useState<keyof ThemeColors | null>('primary');
+  const [editingThemeId, setEditingThemeId] = useState<string | null>(null);
   const probeRef = useRef<HTMLDivElement>(null);
 
   const handleColorChange = (key: keyof ThemeColors, value: string) => {
@@ -57,6 +58,13 @@ export default function ThemeGenerator() {
 
     setColors({ ...DEFAULT_COLORS, ...newColors });
     setThemeName(presetName.charAt(0).toUpperCase() + presetName.slice(1));
+    setEditingThemeId(null);
+  };
+
+  const handleEditUserTheme = (theme: UserTheme) => {
+    setColors({ ...theme.colors });
+    setThemeName(theme.name);
+    setEditingThemeId(theme.id);
   };
 
   const historyBack = () => {
@@ -70,13 +78,25 @@ export default function ThemeGenerator() {
   };
 
   const handleSave = () => {
-    const theme = createUserTheme(themeName, colors);
-    saveUserTheme(theme);
+    if (editingThemeId) {
+      const theme: UserTheme = {
+        id: editingThemeId,
+        name: themeName,
+        colors,
+        createdAt: Date.now(),
+      };
+      saveUserTheme(theme);
+    } else {
+      const theme = createUserTheme(themeName, colors);
+      saveUserTheme(theme);
+    }
     historyBack();
   };
 
   const handleExport = () => {
-    const theme = createUserTheme(themeName, colors);
+    const theme = editingThemeId
+      ? { id: editingThemeId, name: themeName, colors, createdAt: Date.now() }
+      : createUserTheme(themeName, colors);
     const json = exportUserTheme(theme);
     const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -85,6 +105,12 @@ export default function ThemeGenerator() {
     a.download = `${themeName.toLowerCase().replace(/\s+/g, '-')}.json`;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const handleNewTheme = () => {
+    setColors({ ...DEFAULT_COLORS });
+    setThemeName('My Theme');
+    setEditingThemeId(null);
   };
 
   return (
@@ -102,12 +128,18 @@ export default function ThemeGenerator() {
           className="input input-bordered input-sm w-48"
           placeholder="Theme name"
         />
+        {editingThemeId && <span className="badge badge-info badge-sm">Editing</span>}
         <div className="flex-1" />
+        {editingThemeId && (
+          <button type="button" onClick={handleNewTheme} className="btn btn-ghost btn-sm">
+            New Theme
+          </button>
+        )}
         <button type="button" onClick={handleExport} className="btn btn-outline btn-sm">
           Export JSON
         </button>
         <button type="button" onClick={handleSave} className="btn btn-primary btn-sm">
-          Save Theme
+          {editingThemeId ? 'Update Theme' : 'Save Theme'}
         </button>
       </header>
 
@@ -126,7 +158,7 @@ export default function ThemeGenerator() {
         </div>
 
         <div className="w-72 p-4">
-          <ThemePresets onSelectPreset={handleSelectPreset} />
+          <ThemePresets onSelectPreset={handleSelectPreset} onEditUserTheme={handleEditUserTheme} />
         </div>
       </div>
     </div>

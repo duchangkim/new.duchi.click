@@ -1,10 +1,12 @@
 // src/components/theme-generator/theme-presets.tsx
 import { useCallback, useState } from 'react';
 
-import { DAISYUI_THEMES } from '@/lib/theme';
+import type { UserTheme } from '@/lib/theme';
+import { DAISYUI_THEMES, deleteUserTheme, getUserThemes } from '@/lib/theme';
 
 interface Props {
   onSelectPreset: (themeName: string) => void;
+  onEditUserTheme: (theme: UserTheme) => void;
 }
 
 interface PresetColors {
@@ -15,8 +17,12 @@ interface PresetColors {
   accent: string;
 }
 
-export default function ThemePresets({ onSelectPreset }: Props) {
+export default function ThemePresets({ onSelectPreset, onEditUserTheme }: Props) {
   const [presetColors, setPresetColors] = useState<Record<string, PresetColors>>({});
+  const [userThemes, setUserThemes] = useState<UserTheme[]>(() => {
+    if (typeof window === 'undefined') return [];
+    return getUserThemes();
+  });
 
   const probeRefCallback = useCallback((probe: HTMLDivElement | null) => {
     if (!probe) return;
@@ -37,6 +43,17 @@ export default function ThemePresets({ onSelectPreset }: Props) {
 
     setPresetColors(colors);
   }, []);
+
+  const handleDeleteUserTheme = (themeId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    deleteUserTheme(themeId);
+    setUserThemes(getUserThemes());
+  };
+
+  const handleEditUserTheme = (theme: UserTheme, e: React.MouseEvent) => {
+    e.stopPropagation();
+    onEditUserTheme(theme);
+  };
 
   return (
     <div className="flex h-full flex-col">
@@ -74,6 +91,61 @@ export default function ThemePresets({ onSelectPreset }: Props) {
             <span className="text-primary capitalize">{theme}</span>
           </button>
         ))}
+
+        {userThemes.length > 0 && (
+          <>
+            <div className="divider my-2 text-xs opacity-60">My Themes</div>
+            {userThemes.map((theme) => (
+              <div
+                key={theme.id}
+                className="btn btn-ghost btn-block justify-between gap-2 border-0"
+              >
+                <button
+                  type="button"
+                  onClick={() => onEditUserTheme(theme)}
+                  className="flex flex-1 items-center gap-2"
+                >
+                  <div
+                    className="flex gap-1 rounded-md px-2 py-1.5"
+                    style={{ backgroundColor: theme.colors['base-100'] }}
+                  >
+                    <div
+                      className="size-2 rounded-full"
+                      style={{ backgroundColor: theme.colors['base-content'] }}
+                    />
+                    <div
+                      className="size-2 rounded-full"
+                      style={{ backgroundColor: theme.colors.secondary }}
+                    />
+                    <div
+                      className="size-2 rounded-full"
+                      style={{ backgroundColor: theme.colors.accent }}
+                    />
+                  </div>
+                  <span className="text-primary truncate">{theme.name}</span>
+                </button>
+                <div className="flex gap-1">
+                  <button
+                    type="button"
+                    onClick={(e) => handleEditUserTheme(theme, e)}
+                    className="btn btn-ghost btn-xs"
+                    title="Edit"
+                  >
+                    ✏️
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => handleDeleteUserTheme(theme.id, e)}
+                    className="btn btn-ghost btn-xs text-error"
+                    title="Delete"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );
