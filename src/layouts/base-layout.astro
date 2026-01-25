@@ -24,6 +24,54 @@ const { title, description } = Astro.props;
 
     <title>{title}</title>
     <meta name="description" content={description} />
+
+    <script is:inline>
+      (function () {
+        var THEME_KEY = 'duchi-theme';
+        var USER_THEMES_KEY = 'duchi-user-themes';
+
+        var theme = localStorage.getItem(THEME_KEY) || 'light';
+        var html = document.documentElement;
+
+        var colorKeys = [
+          'primary', 'primary-content',
+          'secondary', 'secondary-content',
+          'accent', 'accent-content',
+          'neutral', 'neutral-content',
+          'base-100', 'base-200', 'base-300', 'base-content',
+          'info', 'info-content',
+          'success', 'success-content',
+          'warning', 'warning-content',
+          'error', 'error-content'
+        ];
+
+        colorKeys.forEach(function (key) {
+          html.style.removeProperty('--color-' + key);
+        });
+
+        if (theme.startsWith('user-')) {
+          var themeId = theme.replace('user-', '');
+          html.setAttribute('data-theme', 'light');
+
+          try {
+            var stored = localStorage.getItem(USER_THEMES_KEY);
+            if (stored) {
+              var userThemes = JSON.parse(stored);
+              var userTheme = userThemes.find(function (t) { return t.id === themeId; });
+              if (userTheme && userTheme.colors) {
+                Object.keys(userTheme.colors).forEach(function (key) {
+                  if (userTheme.colors[key]) {
+                    html.style.setProperty('--color-' + key, userTheme.colors[key]);
+                  }
+                });
+              }
+            }
+          } catch (e) {}
+        } else {
+          html.setAttribute('data-theme', theme);
+        }
+      })();
+    </script>
   </head>
 
   <body>

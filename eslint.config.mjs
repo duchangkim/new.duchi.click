@@ -11,7 +11,13 @@ import tseslint from "typescript-eslint";
 export default [
   // 0. 무시할 파일 설정
   {
-    ignores: [".astro/**", "dist/**", "node_modules/**", "public/**"],
+    ignores: [
+      ".astro/**",
+      "dist/**",
+      "node_modules/**",
+      "public/**",
+      "**/*.astro/*.ts",
+    ],
   },
 
   // 1. 공통 언어 옵션 (TypeScript 파서 및 프로젝트 설정)

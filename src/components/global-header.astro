@@ -1,5 +1,6 @@
 ---
 // src/components/global-header.astro
+import ThemeSelector from './theme-selector';
 
 interface NavItem {
   label: string;
@@ -7,15 +8,15 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
-  { label: "Showcase", href: "/showcase" },
+  { label: 'About', href: '/about' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Showcase', href: '/showcase' },
 ];
 
 const currentPath = Astro.url.pathname;
 
 const isActive = (href: string): boolean => {
-  if (href === "/") return currentPath === "/";
+  if (href === '/') return currentPath === '/';
   return currentPath.startsWith(href);
 };
 ---
@@ -43,7 +44,7 @@ const isActive = (href: string): boolean => {
       </div>
       <ul
         tabindex="0"
-        class="menu dropdown-content menu-sm z-10 mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+        class="menu dropdown-content menu-sm z-10 mt-3 w-52 rounded-box bg-base-100 p-2 shadow gap-1"
       >
         {
           navItems.map((item) => (
@@ -59,7 +60,7 @@ const isActive = (href: string): boolean => {
         }
       </ul>
     </div>
-    <ul class="menu menu-horizontal hidden px-1 lg:flex">
+    <ul class="menu menu-horizontal hidden px-1 lg:flex gap-1">
       {
         navItems.map((item) => (
           <li>
@@ -73,5 +74,6 @@ const isActive = (href: string): boolean => {
         ))
       }
     </ul>
+    <ThemeSelector client:load />
   </div>
 </header>

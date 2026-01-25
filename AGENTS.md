@@ -89,6 +89,7 @@ import BaseLayout from "../../layouts/base-layout.astro";
 | Type                  | Convention                  | Example                         |
 | --------------------- | --------------------------- | ------------------------------- |
 | Files (components)    | kebab-case                  | `base-layout.astro`             |
+| Files (React .tsx)    | kebab-case                  | `theme-selector.tsx`            |
 | Files (pages)         | kebab-case or `index.astro` | `about/index.astro`             |
 | React Components      | PascalCase                  | `<BaseLayout />`                |
 | TypeScript interfaces | PascalCase                  | `interface Props`               |
