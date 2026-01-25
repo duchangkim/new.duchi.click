@@ -59,10 +59,20 @@ export default function ThemeGenerator() {
     setThemeName(presetName.charAt(0).toUpperCase() + presetName.slice(1));
   };
 
+  const historyBack = () => {
+    const referrer = document.referrer;
+    const isSameOrigin = referrer && new URL(referrer).origin === window.location.origin;
+    if (isSameOrigin) {
+      window.history.back();
+    } else {
+      window.location.href = '/';
+    }
+  };
+
   const handleSave = () => {
     const theme = createUserTheme(themeName, colors);
     saveUserTheme(theme);
-    window.location.href = '/';
+    historyBack();
   };
 
   const handleExport = () => {
@@ -82,19 +92,7 @@ export default function ThemeGenerator() {
       <div ref={probeRef} className="hidden" />
 
       <header className="border-base-300 flex items-center gap-4 border-b px-4 py-3">
-        <button
-          type="button"
-          onClick={() => {
-            const referrer = document.referrer;
-            const isSameOrigin = referrer && new URL(referrer).origin === window.location.origin;
-            if (isSameOrigin) {
-              window.history.back();
-            } else {
-              window.location.href = '/';
-            }
-          }}
-          className="btn btn-ghost btn-sm"
-        >
+        <button type="button" onClick={historyBack} className="btn btn-ghost btn-sm">
           ← Back
         </button>
         <input

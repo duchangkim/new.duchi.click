@@ -8,10 +8,11 @@ interface Props {
 }
 
 interface PresetColors {
+  base: string;
+  baseContent: string;
   primary: string;
   secondary: string;
   accent: string;
-  neutral: string;
 }
 
 export default function ThemePresets({ onSelectPreset }: Props) {
@@ -26,10 +27,11 @@ export default function ThemePresets({ onSelectPreset }: Props) {
       probe.setAttribute('data-theme', theme);
       const style = getComputedStyle(probe);
       colors[theme] = {
+        base: style.getPropertyValue('--color-base-100') || '#ffffff',
+        baseContent: style.getPropertyValue('--color-base-content') || '#000000',
         primary: style.getPropertyValue('--color-primary') || '#570df8',
         secondary: style.getPropertyValue('--color-secondary') || '#f000b8',
         accent: style.getPropertyValue('--color-accent') || '#37cdbe',
-        neutral: style.getPropertyValue('--color-neutral') || '#3d4451',
       };
     });
 
@@ -48,31 +50,28 @@ export default function ThemePresets({ onSelectPreset }: Props) {
             key={theme}
             type="button"
             onClick={() => onSelectPreset(theme)}
-            className="btn btn-ghost btn-block justify-start gap-3"
+            className="btn btn-ghost btn-block justify-start gap-2 border-0"
           >
-            <div className="flex gap-1">
-              {presetColors[theme] && (
-                <>
-                  <div
-                    className="h-5 w-5 rounded"
-                    style={{ backgroundColor: presetColors[theme].primary }}
-                  />
-                  <div
-                    className="h-5 w-5 rounded"
-                    style={{ backgroundColor: presetColors[theme].secondary }}
-                  />
-                  <div
-                    className="h-5 w-5 rounded"
-                    style={{ backgroundColor: presetColors[theme].accent }}
-                  />
-                  <div
-                    className="h-5 w-5 rounded"
-                    style={{ backgroundColor: presetColors[theme].neutral }}
-                  />
-                </>
-              )}
-            </div>
-            <span className="capitalize">{theme}</span>
+            {presetColors[theme] && (
+              <div
+                className="flex gap-1 rounded-md px-2 py-1.5"
+                style={{ backgroundColor: presetColors[theme].base }}
+              >
+                <div
+                  className="size-2 rounded-full border border-current/20"
+                  style={{ backgroundColor: presetColors[theme].baseContent }}
+                />
+                <div
+                  className="size-2 rounded-full border border-current/20"
+                  style={{ backgroundColor: presetColors[theme].secondary }}
+                />
+                <div
+                  className="size-2 rounded-full border border-current/20"
+                  style={{ backgroundColor: presetColors[theme].accent }}
+                />
+              </div>
+            )}
+            <span className="text-primary capitalize">{theme}</span>
           </button>
         ))}
       </div>

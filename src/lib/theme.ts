@@ -30,7 +30,7 @@ export interface UserTheme {
   createdAt: number;
 }
 
-export const DAISYUI_THEMES = ['light', 'dark'] as const;
+export const DAISYUI_THEMES = ['light', 'dark', 'retro', 'emerald', 'valentine', 'forest'] as const;
 
 export type DaisyUITheme = (typeof DAISYUI_THEMES)[number];
 
