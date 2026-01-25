@@ -82,9 +82,21 @@ export default function ThemeGenerator() {
       <div ref={probeRef} className="hidden" />
 
       <header className="border-base-300 flex items-center gap-4 border-b px-4 py-3">
-        <a href="/" className="btn btn-ghost btn-sm">
+        <button
+          type="button"
+          onClick={() => {
+            const referrer = document.referrer;
+            const isSameOrigin = referrer && new URL(referrer).origin === window.location.origin;
+            if (isSameOrigin) {
+              window.history.back();
+            } else {
+              window.location.href = '/';
+            }
+          }}
+          className="btn btn-ghost btn-sm"
+        >
           ← Back
-        </a>
+        </button>
         <input
           type="text"
           value={themeName}
