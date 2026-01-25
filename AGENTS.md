@@ -156,7 +156,7 @@ const { title, description } = Astro.props;
 
 ## Architecture
 
-```
+```plain
 src/
 ├── assets/       # CSS and static assets processed by Vite
 │   └── app.css   # Global styles (Tailwind + DaisyUI)
@@ -178,7 +178,7 @@ src/
 
 Follow **Conventional Commits**:
 
-```
+```plain
 <type>[optional scope]: <description>
 ```
 

@@ -2,8 +2,8 @@
 // src/pages/blog/[slug].astro
 import type { GetStaticPaths } from "astro";
 
-import BaseLayout from "@/layouts/base-layout.astro";
-import { getAllPostSlugs, getPostBySlug } from "@/lib/ghost";
+import AppLayout from '@/layouts/app-layout.astro';
+import { getAllPostSlugs, getPostBySlug } from '@/lib/ghost';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const slugs = await getAllPostSlugs();
@@ -33,7 +33,7 @@ const pageTitle = `${post.title} | blog.duchi.click`;
 const pageDescription = post.custom_excerpt || post.excerpt || "";
 ---
 
-<BaseLayout
+<AppLayout
   title={pageTitle}
   description={pageDescription}
   image={post.feature_image ?? undefined}
@@ -91,4 +91,4 @@ const pageDescription = post.custom_excerpt || post.excerpt || "";
       <a href="/blog" class="btn btn-outline btn-primary">← Back to Blog</a>
     </footer>
   </article>
-</BaseLayout>
+</AppLayout>

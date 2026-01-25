@@ -64,7 +64,7 @@ The blog will use Astro's Static Site Generation (SSG) with the following flow:
 
 **Example n8n Webhook Endpoint**:
 
-```
+```plain
 POST /webhooks/ghost-build
 {
   "event": "post.published",
@@ -142,7 +142,7 @@ const posts = await ghost.posts.browse(
   {
     url: GHOST_API_URL,
     key: GHOST_CONTENT_API_KEY,
-  },
+  }
 );
 ```
 
@@ -263,7 +263,7 @@ class GhostClient {
 
           if (!response.ok) {
             throw new Error(
-              `Ghost API error: ${response.status} ${response.statusText}`,
+              `Ghost API error: ${response.status} ${response.statusText}`
             );
           }
 

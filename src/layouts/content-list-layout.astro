@@ -3,7 +3,7 @@
 import type { Page } from 'astro';
 
 import Pagination from '@/components/pagination.astro';
-import BaseLayout from '@/layouts/base-layout.astro';
+import AppLayout from '@/layouts/app-layout.astro';
 import type { CardItem } from '@/types/content';
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 const { title, description, page, basePath } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<AppLayout title={title} description={description}>
   <main class="container mx-auto px-4 py-12">
     <header class="mb-12">
       <h1 class="mb-4 text-4xl font-bold">{title.split(' | ')[0]}</h1>
@@ -79,4 +79,4 @@ const { title, description, page, basePath } = Astro.props;
 
     {page.lastPage > 1 && <Pagination page={page} basePath={basePath} />}
   </main>
-</BaseLayout>
+</AppLayout>

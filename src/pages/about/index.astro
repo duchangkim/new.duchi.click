@@ -1,9 +1,11 @@
 ---
-import BaseLayout from "@/layouts/base-layout.astro";
+// src/pages/about/index.astro
+import AppLayout from '@/layouts/app-layout.astro';
 ---
 
-<BaseLayout title="About" description="About page">
-  <h1>About</h1>
-
-  <a href="/">Main</a>
-</BaseLayout>
+<AppLayout title="About" description="About page">
+  <main class="container mx-auto px-4 py-12">
+    <h1 class="mb-4 text-4xl font-bold">About</h1>
+    <p class="text-base-content/70">About page content goes here.</p>
+  </main>
+</AppLayout>
