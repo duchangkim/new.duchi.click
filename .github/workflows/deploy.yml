@@ -4,6 +4,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      trigger_source:
+        description: 'What triggered this build'
+        required: false
+        default: 'manual'
+      post_title:
+        description: 'Post title (for logging)'
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -18,6 +27,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Log trigger info
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "🚀 Build triggered by: ${{ github.event.inputs.trigger_source }}"
+          echo "📝 Post: ${{ github.event.inputs.post_title }}"
+
       - name: Checkout
         uses: actions/checkout@v4
 
