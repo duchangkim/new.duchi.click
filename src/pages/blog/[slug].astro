@@ -2,6 +2,7 @@
 // src/pages/blog/[slug].astro
 import type { GetStaticPaths } from 'astro';
 
+import GiscusComments from '@/components/giscus-comments';
 import AppLayout from '@/layouts/app-layout.astro';
 import { getAllPostSlugs, getPostBySlug } from '@/lib/ghost';
 
@@ -77,6 +78,14 @@ const pageDescription = post.custom_excerpt || post.excerpt || '';
     </header>
 
     <div class="prose prose-lg prose-slate dark:prose-invert max-w-none" set:html={post.html} />
+
+    <GiscusComments
+      client:visible
+      repo="duchangkim/new.duchi.click"
+      repoId="R_kgDOQuzFcQ"
+      category="Announcements"
+      categoryId="DIC_kwDOQuzFcc4C192b"
+    />
 
     <footer class="border-base-200 mt-16 border-t pt-8">
       <a href="/blog" class="btn btn-outline btn-primary">← Back to Blog</a>
