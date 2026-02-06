@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
+    "@giscus/react": "^3.1.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "@tryghost/content-api": "^1.12.3",
