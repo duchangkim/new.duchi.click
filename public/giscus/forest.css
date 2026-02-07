@@ -1,0 +1,95 @@
+/*! Custom giscus theme for DaisyUI forest */
+
+main {
+  --color-prettylights-syntax-comment: #8b949e;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-btn-text: #cac9c9;
+  --color-btn-bg: #161212;
+  --color-btn-border: rgb(240 246 252 / 10%);
+  --color-btn-shadow: 0 0 transparent;
+  --color-btn-inset-shadow: 0 0 transparent;
+  --color-btn-hover-bg: #110d0d;
+  --color-btn-hover-border: rgb(240 246 252 / 10%);
+  --color-btn-active-bg: #110d0d;
+  --color-btn-active-border: rgb(240 246 252 / 10%);
+  --color-btn-selected-bg: #110d0d;
+  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: #1fb854;
+  --color-btn-primary-border: rgb(240 246 252 / 10%);
+  --color-btn-primary-shadow: 0 0 transparent;
+  --color-btn-primary-inset-shadow: 0 0 transparent;
+  --color-btn-primary-hover-bg: #0ba440;
+  --color-btn-primary-hover-border: rgb(240 246 252 / 10%);
+  --color-btn-primary-selected-bg: #1fb854;
+  --color-btn-primary-selected-shadow: 0 0 transparent;
+  --color-btn-primary-disabled-text: rgb(255 255 255 / 50%);
+  --color-btn-primary-disabled-bg: #47e07c;
+  --color-btn-primary-disabled-border: rgb(240 246 252 / 10%);
+  --color-action-list-item-default-hover-bg: rgb(177 186 196 / 12%);
+  --color-segmented-control-bg: #161212;
+  --color-segmented-control-button-bg: #1b1717;
+  --color-segmented-control-button-selected-border: #110d0d;
+  --color-fg-default: #cac9c9;
+  --color-fg-muted: #848282;
+  --color-fg-subtle: #727070;
+  --color-canvas-default: #1b1717;
+  --color-canvas-overlay: #1b1717;
+  --color-canvas-inset: #161212;
+  --color-canvas-subtle: #161212;
+  --color-border-default: #110d0d;
+  --color-border-muted: #1b1717;
+  --color-neutral-muted: rgb(110 118 129 / 40%);
+  --color-accent-fg: #1fb854;
+  --color-accent-emphasis: #1fb854;
+  --color-accent-muted: rgb(31 184 84 / 40%);
+  --color-accent-subtle: #1b271d;
+  --color-success-fg: #00a96e;
+  --color-attention-fg: #fcb700;
+  --color-attention-muted: rgb(252 183 0 / 40%);
+  --color-attention-subtle: #3d2f14;
+  --color-danger-fg: #ff5861;
+  --color-danger-muted: rgb(255 88 97 / 40%);
+  --color-danger-subtle: #3d2122;
+  --color-primer-shadow-inset: 0 0 transparent;
+  --color-scale-gray-7: #161212;
+  --color-scale-blue-8: #1b271d;
+
+  --color-social-reaction-bg-hover: var(--color-scale-gray-7);
+  --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-8);
+}
+
+main .pagination-loader-container {
+  background-image: url("https://github.com/images/modules/pulls/progressive-disclosure-line-dark.svg");
+}
+
+main .gsc-loading-image {
+  background-image: url("https://github.githubassets.com/images/mona-loading-dark.gif");
+}

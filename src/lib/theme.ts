@@ -289,3 +289,37 @@ export function hexToOklch(hex: string): OklchColor {
 
   return { l: L, c, h };
 }
+
+export const GISCUS_THEME_MAP: Record<DaisyUITheme, string> = {
+  light: 'light',
+  dark: 'dark',
+  retro: 'retro',
+  emerald: 'emerald',
+  valentine: 'valentine',
+  forest: 'forest',
+};
+
+export function getGiscusTheme(themeName: string): string {
+  if (typeof window === 'undefined') return 'light';
+
+  // DaisyUI preset theme → custom CSS URL (absolute)
+  if (isDaisyUITheme(themeName)) {
+    return `${window.location.origin}/giscus/${GISCUS_THEME_MAP[themeName]}.css`;
+  }
+
+  // User custom theme → analyze base-100 lightness for light/dark fallback
+  if (isUserTheme(themeName)) {
+    const themeId = themeName.replace('user-', '');
+    const userTheme = getUserTheme(themeId);
+    if (userTheme) {
+      const parsed = parseOklch(userTheme.colors['base-100']);
+      if (parsed && parsed.l > 0.6) {
+        return 'light';
+      }
+      return 'dark';
+    }
+  }
+
+  // Unknown theme → default to light
+  return 'light';
+}
