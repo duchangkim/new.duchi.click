@@ -27,7 +27,12 @@
     "daisyui": "^5.5.14",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "rehype-parse": "^9.0.1",
+    "rehype-stringify": "^10.0.1",
+    "shiki": "^3.22.0",
     "tailwindcss": "^4.1.18",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
