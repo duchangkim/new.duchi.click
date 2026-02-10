@@ -299,12 +299,21 @@ export const GISCUS_THEME_MAP: Record<DaisyUITheme, string> = {
   forest: 'forest',
 };
 
+/** Production site origin for giscus theme CSS.
+ *  Dev environment cannot serve CSS to the giscus.app iframe
+ *  (mixed content: HTTPS iframe → HTTP localhost). */
+const GISCUS_CSS_ORIGIN = import.meta.env.DEV
+  ? 'https://blog.duchi.click'
+  : typeof window !== 'undefined'
+    ? window.location.origin
+    : 'https://blog.duchi.click';
+
 export function getGiscusTheme(themeName: string): string {
   if (typeof window === 'undefined') return 'light';
 
   // DaisyUI preset theme → custom CSS URL (absolute)
   if (isDaisyUITheme(themeName)) {
-    return `${window.location.origin}/giscus/${GISCUS_THEME_MAP[themeName]}.css`;
+    return `${GISCUS_CSS_ORIGIN}/giscus/${GISCUS_THEME_MAP[themeName]}.css`;
   }
 
   // User custom theme → analyze base-100 lightness for light/dark fallback
